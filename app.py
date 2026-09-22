@@ -5,7 +5,6 @@ from openai import OpenAI
 st.set_page_config(page_title="VMY2026 AI Assistant", layout="centered")
 
 # Custom CSS for Power BI Purple Theme & Clean Layout
-# Dashboard-Matched CSS (VMY2026 Theme with Pure Black Font)
 st.markdown(
     """
     <style>
@@ -78,15 +77,18 @@ st.markdown(
             border: 1px solid #9E87C7 !important;
         }
 
-        /* Chat Input Field Styling */
+        /* RESTORED: Purple-Tinted Chat Input Box with Dark Border */
         [data-testid="stChatInput"] {
-            border-radius: 10px;
-            background-color: #FFFFFF !important;
+            border-radius: 12px !important;
+            background-color: #9E87C7 !important;
             border: 2px solid #502C7C !important;
-            box-shadow: 0 2px 8px rgba(80, 44, 124, 0.2);
         }
         [data-testid="stChatInput"] textarea {
             color: #000000 !important;
+            background-color: transparent !important;
+        }
+        [data-testid="stChatInput"] textarea::placeholder {
+            color: #2E1B4E !important;
         }
 
         /* Hide Streamlit fullscreen button */
