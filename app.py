@@ -18,7 +18,7 @@ st.markdown(
 
 # Initialize OpenAI/Gonka Client using Streamlit Secrets
 GONKA_BASE_URL = "https://api.gonkarouter.io/v1"
-GONKA_API_KEY = st.secrets["sk-XZaLbHmWNsuQUN8ZKEhQYLJn4PcgM2gsfujpcpblX4m3zau0"]
+GONKA_API_KEY = st.secrets["GONKA_API_KEY"]
 
 client = OpenAI(
     base_url=GONKA_BASE_URL,
