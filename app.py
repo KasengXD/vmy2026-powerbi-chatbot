@@ -4,17 +4,47 @@ from openai import OpenAI
 # Page configuration for embedding inside Power BI
 st.set_page_config(page_title="VMY2026 AI Assistant", layout="centered")
 
-# Hide default headers/footers to save screen space inside Power BI iframe
+# Custom CSS for Power BI Purple Theme & Clean Layout
 st.markdown(
     """
     <style>
-        .block-container { padding-top: 1rem; padding-bottom: 1rem; }
+        /* Reduce padding to maximize space inside the Power BI iframe */
+        .block-container { 
+            padding-top: 0.5rem; 
+            padding-bottom: 0.5rem; 
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        
+        /* Hide default Streamlit header & footer */
         header { visibility: hidden; }
         footer { visibility: hidden; }
+        
+        /* Match Power BI canvas purple background */
+        .stApp {
+            background-color: #B5A1DB;
+        }
+
+        /* Clean white chat bubbles */
+        [data-testid="stChatMessage"] {
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Clean chat input box */
+        [data-testid="stChatInput"] {
+            border-radius: 8px;
+            background-color: #FFFFFF;
+        }
     </style>
 """,
     unsafe_allow_html=True,
 )
+
+# Visible Title inside the Chatbot Frame
+st.markdown("### 🤖 VMY2026 AI Assistant")
+st.caption("Ask questions about arrivals, hotel occupancy, or tourism spending.")
 
 # Initialize OpenAI/Gonka Client using Streamlit Secrets
 GONKA_BASE_URL = "https://api.gonkarouter.io/v1"
@@ -32,9 +62,14 @@ Key metrics:
 - Accommodation: Hotel occupancy is 42.66%. Domestic market accounts for 77.2%.
 - Strategy: ML forecasts show steady arrival growth leading into Dec 2027."""
 
-# Maintain conversation history
+# Maintain conversation history with an initial greeting
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = [
+        {
+            "role": "assistant",
+            "content": "Hello! I am your VMY2026 AI Assistant. Ask me anything about tourism arrivals, hotel occupancy, or strategy forecasts!",
+        }
+    ]
 
 # Display chat history
 for msg in st.session_state.messages:
