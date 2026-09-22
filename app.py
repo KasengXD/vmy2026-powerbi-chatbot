@@ -103,17 +103,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Header Card Markup
-st.markdown(
-    """
-    <div class="header-card">
-        <h3>🤖 VMY2026 AI Assistant</h3>
-        <p>Ask about arrival forecasts, hotel occupancy, or spending metrics</p>
-    </div>
-""",
-    unsafe_allow_html=True,
-)
-
 # Initialize OpenAI/Gonka Client using Streamlit Secrets
 GONKA_BASE_URL = "https://api.gonkarouter.io/v1"
 GONKA_API_KEY = st.secrets["GONKA_API_KEY"]
