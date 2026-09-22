@@ -9,8 +9,8 @@ st.markdown(
     """
     <style>
         /* Base Canvas Background */
-        .stApp, [data-testid="stAppViewContainer"] {
-            background-color: #B5A1DB !important;
+        .stApp {
+            background-color: #B5A1DB;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #000000 !important;
         }
@@ -25,17 +25,12 @@ st.markdown(
 
         header, footer { visibility: hidden; }
 
-        /* Force pure black font across all text elements */
+        /* Force pure black font across all text, paragraphs, headings, and input fields */
         p, span, div, h1, h2, h3, h4, label, input, textarea {
             color: #000000 !important;
         }
 
-        /* Fix Bottom Chat Input Container (Prevents Black Bar in Dark Mode) */
-        [data-testid="stBottom"], div[data-testid="stBottom"] > div {
-            background-color: #B5A1DB !important;
-        }
-
-        /* Header Card - White card with purple border */
+        /* Header Card - White card with purple border for clean black text contrast */
         .header-card {
             background-color: #FFFFFF;
             border: 2px solid #502C7C;
@@ -65,30 +60,27 @@ st.markdown(
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* User Message - Soft Lavender Card */
+        /* User Message - Soft Lavender Card with Dark Purple Accent Border */
         [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
-            background-color: #E2D9F3 !important;
-            border: 1px solid #502C7C !important;
+            background-color: #E2D9F3;
+            border: 1px solid #502C7C;
         }
 
         /* AI Assistant Message - Crisp White Card */
         [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
-            background-color: #FFFFFF !important;
-            border: 1px solid #9E87C7 !important;
+            background-color: #FFFFFF;
+            border: 1px solid #9E87C7;
         }
 
-        /* RESTORED: Purple-Tinted Chat Input Box with Dark Border */
+        /* Chat Input Field Styling */
         [data-testid="stChatInput"] {
-            border-radius: 12px !important;
-            background-color: #9E87C7 !important;
-            border: 2px solid #502C7C !important;
+            border-radius: 10px;
+            background-color: #FFFFFF;
+            border: 2px solid #502C7C;
+            box-shadow: 0 2px 8px rgba(80, 44, 124, 0.2);
         }
         [data-testid="stChatInput"] textarea {
             color: #000000 !important;
-            background-color: transparent !important;
-        }
-        [data-testid="stChatInput"] textarea::placeholder {
-            color: #2E1B4E !important;
         }
 
         /* Hide Streamlit fullscreen button */
@@ -96,6 +88,17 @@ st.markdown(
             display: none;
         }
     </style>
+""",
+    unsafe_allow_html=True,
+)
+
+# Header Card Markup
+st.markdown(
+    """
+    <div class="header-card">
+        <h3>🤖 VMY2026 AI Assistant</h3>
+        <p>Ask about arrival forecasts, hotel occupancy, or spending metrics</p>
+    </div>
 """,
     unsafe_allow_html=True,
 )
