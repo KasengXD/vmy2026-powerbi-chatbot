@@ -5,46 +5,104 @@ from openai import OpenAI
 st.set_page_config(page_title="VMY2026 AI Assistant", layout="centered")
 
 # Custom CSS for Power BI Purple Theme & Clean Layout
+# Dashboard-Matched CSS (VMY2026 Theme with Pure Black Font)
 st.markdown(
     """
     <style>
-        /* Reduce padding to maximize space inside the Power BI iframe */
-        .block-container { 
-            padding-top: 0.5rem; 
-            padding-bottom: 0.5rem; 
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
-        
-        /* Hide default Streamlit header & footer */
-        header { visibility: hidden; }
-        footer { visibility: hidden; }
-        
-        /* Match Power BI canvas purple background */
+        /* Base Canvas Background */
         .stApp {
             background-color: #B5A1DB;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #000000 !important;
         }
 
-        /* Clean white chat bubbles */
+        /* Tighten margins for iframe integration */
+        .block-container {
+            padding-top: 0.8rem;
+            padding-bottom: 1rem;
+            padding-left: 0.8rem;
+            padding-right: 0.8rem;
+        }
+
+        header, footer { visibility: hidden; }
+
+        /* Force pure black font across all text, paragraphs, headings, and input fields */
+        p, span, div, h1, h2, h3, h4, label, input, textarea {
+            color: #000000 !important;
+        }
+
+        /* Header Card - White card with purple border for clean black text contrast */
+        .header-card {
+            background-color: #FFFFFF;
+            border: 2px solid #502C7C;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header-card h3 {
+            margin: 0;
+            padding: 0;
+            color: #000000 !important;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .header-card p {
+            margin: 4px 0 0 0;
+            font-size: 0.82rem;
+            color: #000000 !important;
+        }
+
+        /* Base Chat Message Containers */
         [data-testid="stChatMessage"] {
-            background-color: #FFFFFF;
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Clean chat input box */
-        [data-testid="stChatInput"] {
-            border-radius: 8px;
+        /* User Message - Soft Lavender Card with Dark Purple Accent Border */
+        [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+            background-color: #E2D9F3;
+            border: 1px solid #502C7C;
+        }
+
+        /* AI Assistant Message - Crisp White Card */
+        [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
             background-color: #FFFFFF;
+            border: 1px solid #9E87C7;
+        }
+
+        /* Chat Input Field Styling */
+        [data-testid="stChatInput"] {
+            border-radius: 10px;
+            background-color: #FFFFFF;
+            border: 2px solid #502C7C;
+            box-shadow: 0 2px 8px rgba(80, 44, 124, 0.2);
+        }
+        [data-testid="stChatInput"] textarea {
+            color: #000000 !important;
+        }
+
+        /* Hide Streamlit fullscreen button */
+        button[title="View fullscreen"] {
+            display: none;
         }
     </style>
 """,
     unsafe_allow_html=True,
 )
 
-# Visible Title inside the Chatbot Frame
-st.markdown("### 🤖 VMY2026 AI Assistant")
-st.caption("Ask questions about arrivals, hotel occupancy, or tourism spending.")
+# Header Card Markup
+st.markdown(
+    """
+    <div class="header-card">
+        <h3>🤖 VMY2026 AI Assistant</h3>
+        <p>Ask about arrival forecasts, hotel occupancy, or spending metrics</p>
+    </div>
+""",
+    unsafe_allow_html=True,
+)
 
 # Initialize OpenAI/Gonka Client using Streamlit Secrets
 GONKA_BASE_URL = "https://api.gonkarouter.io/v1"
