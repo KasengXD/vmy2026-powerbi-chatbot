@@ -10,8 +10,8 @@ st.markdown(
     """
     <style>
         /* Base Canvas Background */
-        .stApp {
-            background-color: #B5A1DB;
+        .stApp, [data-testid="stAppViewContainer"] {
+            background-color: #B5A1DB !important;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #000000 !important;
         }
@@ -26,12 +26,17 @@ st.markdown(
 
         header, footer { visibility: hidden; }
 
-        /* Force pure black font across all text, paragraphs, headings, and input fields */
+        /* Force pure black font across all text elements */
         p, span, div, h1, h2, h3, h4, label, input, textarea {
             color: #000000 !important;
         }
 
-        /* Header Card - White card with purple border for clean black text contrast */
+        /* Fix Bottom Chat Input Container (Prevents Black Bar in Dark Mode) */
+        [data-testid="stBottom"], div[data-testid="stBottom"] > div {
+            background-color: #B5A1DB !important;
+        }
+
+        /* Header Card - White card with purple border */
         .header-card {
             background-color: #FFFFFF;
             border: 2px solid #502C7C;
@@ -61,23 +66,23 @@ st.markdown(
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* User Message - Soft Lavender Card with Dark Purple Accent Border */
+        /* User Message - Soft Lavender Card */
         [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
-            background-color: #E2D9F3;
-            border: 1px solid #502C7C;
+            background-color: #E2D9F3 !important;
+            border: 1px solid #502C7C !important;
         }
 
         /* AI Assistant Message - Crisp White Card */
         [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
-            background-color: #FFFFFF;
-            border: 1px solid #9E87C7;
+            background-color: #FFFFFF !important;
+            border: 1px solid #9E87C7 !important;
         }
 
         /* Chat Input Field Styling */
         [data-testid="stChatInput"] {
             border-radius: 10px;
-            background-color: #FFFFFF;
-            border: 2px solid #502C7C;
+            background-color: #FFFFFF !important;
+            border: 2px solid #502C7C !important;
             box-shadow: 0 2px 8px rgba(80, 44, 124, 0.2);
         }
         [data-testid="stChatInput"] textarea {
